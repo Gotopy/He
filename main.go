@@ -1,12 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func main() {
-	fmt.Println("Hello world")
-	time.Sleep(10000 * time.Second)
-	fmt.Println("end")
+	r := gin.Default()
+	r.GET("/", func(context *gin.Context) {
+		context.String(http.StatusOK, "hello gin")
+	})
+	r.GET("/healthy", func(context *gin.Context) {
+		context.String(http.StatusOK, "it is very healthy service")
+	})
+	r.Run()
 }
